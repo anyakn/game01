@@ -27,9 +27,9 @@ else:
 
 
 
-health_n = 100
+health_n = 200
 money_n = 100
-weapon_n = 100
+weapon_n = 500
 
 print('Параметры "Нефилимов": ', '\n', 'Здоровье:', health_n, '\n', 'Монеты:', money_n, '\n', 'Оружие:', weapon_n)
 print('')
@@ -47,15 +47,21 @@ print('Как меняются параметры Мирных жителей:',
 print('')
 sl_1 = input('Если хотите выбрать 1-й исход, то введите "1". Если хотите выбрать 2-й исход, то введите "2": ')
 if sl_1 == '1':
-      health_n -= 20
-      money_n += 15
-      #a.health_d -= 30
-      #a.potion -= 30
+      if health_n >= 20:
+            health_n -= 20
+            money_n += 15
+            # a.health_d -= 30
+            # a.potion -= 30
+      else:
+            print('Кажется, у вас недостаточно ресурсов!')
 elif sl_1 == '2':
-      health_n -= 30
-      weapon_n -= 20
-      #k.v_health += 30
-      #k.v_shelter += 10
+      if health_n >= 30 and weapon_n >= 20:
+            health_n -= 30
+            weapon_n -= 20
+            # k.v_health += 30
+            # k.v_shelter += 10
+      else:
+            print('Кажется у вас недостаточно ресурсов!')
 print('')
 print('Выбор сделан!')
 print('')
@@ -121,15 +127,21 @@ print('Как меняются параметры Мирных жителей:',
 print('')
 sl_2 = input('Если хотите выбрать 1-й исход, то введите "1". Если хотите выбрать 2-й исход, то введите "2": ')
 if sl_2 == '1':
-      health_n -= 20
-      weapon_n -= 20
-      #a.health_d -= 40
-      #a.potion -= 10
+      if health_n >= 20 and weapon_n >= 20:
+            health_n -= 20
+            weapon_n -= 20
+            # a.health_d -= 40
+            # a.potion -= 10
+      else:
+            print('Кажется, у вас недостаточно ресурсов!')
 elif sl_2 == '2':
-      health_n -= 10
-      money_n -= 30
-      #k.v_money += 20
-      #k.v_shelter += 30
+      if health_n >= 10 and money_n >= 30:
+            health_n -= 10
+            money_n -= 30
+            # k.v_money += 20
+            # k.v_shelter += 30
+      else:
+            print('Кажется, у вас недостаточно ресурсов!')
 print('')
 print('Выбор сделан!')
 print('')
@@ -195,14 +207,20 @@ print('Как меняются параметры Мирных жителей:',
 print('')
 sl_3 = input('Если хотите выбрать 1-й исход, то введите "1". Если хотите выбрать 2-й исход, то введите "2": ')
 if sl_3 == '1':
-      health_n -= 30
-      weapon_n -= 30
-      #a.health_d -= 10
-      #a.potion -= 30
+      if health_n >= 30 and weapon_n >= 30:
+            health_n -= 30
+            weapon_n -= 30
+            # a.health_d -= 10
+            # a.potion -= 30
+      else:
+            print('Кажется, у вас недостаточно ресурсов!')
 elif sl_3 == '2':
-      health_n -= 15
-      #k.v_money += 20
-      #k.v_shelter += 10
+      if health_n >= 15:
+            health_n -= 15
+            # k.v_money += 20
+            # k.v_shelter += 10
+      else:
+            print('Кажется, у вас недостаточно ресурсов!')
 print('')
 print('Выбор сделан!')
 print('')
