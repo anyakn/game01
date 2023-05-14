@@ -44,8 +44,8 @@ if ch1 == '1':
     if health_d >= 14 and potion >= 11:
         health_d -= 14
         potion -= 11
-        # u.health_n -= 15
-        # u.weapon_n -= 10
+        # health_n -= 15
+        # weapon_n -= 10
     else:
         print('Упс... Походу у вас недостаточно ресурсов')
 elif ch1 == '2':
@@ -128,7 +128,7 @@ if ch3 == '1':
         health_d -= 5
         potion -= 25
         money_d += 20
-        # u.weapon_n -= 30
+        # weapon_n -= 30
         # v_health -= 20
         # v_shelter -= 15
     else:
