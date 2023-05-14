@@ -1,17 +1,17 @@
 import random
 import time
 
-v_health = 100
+v_health = 200
 v_money = 100
-v_shelter = 100
+v_shelter = 500
 
-money_d = 100
+money_d = 200
 health_d = 100
-potion = 100
+potion = 500
 
-health_n = 100
+health_n = 200
 money_n = 100
-weapon_n = 100
+weapon_n = 500
 
 input('Мирные жители, вы готовы начать игру? ')
 print('')
@@ -57,9 +57,13 @@ print('Каким путём вы последуете в этот раз?')
 ans_1 = int(input('Введите "1",если хотите последовать решению старейшин; '
                   'Введите "2",если хотите продолжить со вторым вариантом: '))
 if ans_1 == 1:
-    v_health -= 10
-    v_money += 15
-    potion -= 20
+    if v_health >= 10 and potion >= 20:
+        v_health -= 10
+        v_money += 20
+        potion -= 20
+    else:
+        v_shelter += 20
+        print('Кажется, у вас не хватает ресурсов для этого выбора... Придётся пойти по второму пути')
 elif ans_1 == 2:
     v_shelter += 20
 print('')
@@ -80,22 +84,31 @@ print('')
 print('Время не ждёт! Скрестите пальцы на удачу')
 time.sleep(2)
 
-rand_event1_d = random.randint(1, 2)
-if rand_event1_d == 1:
+rand_event1_v = random.randint(1, 2)
+if rand_event1_v == 1:
     print('Якорь мне в бухту! Вы нашли потерянное сокровище пиратов! Вы получили +20 "монет".')
     v_money += 20
 else:
     print('Ох, нет... Спящий вулкан проснулся! Вулканический пепел накрыл часть вашего поселения, -40 "убежища"')
-    v_shelter -= 40
+    if v_shelter >= 40:
+        v_shelter -= 40
+    else:
+        v_shelter == 0
     time.sleep(1)
     print('Кажется, у вас появилась проблема...')
     time.sleep(1)
-    ans_3 = input('Введите "1", если хотите потратить 40 "монеты" чтобы добавить +20 "убежища": ')
+    ans_3 = input('Введите "1", если хотите потратить 30 "монеты" чтобы добавить +20 "убежища": ')
     if ans_3 == 1:
-        v_money -= 40
-        v_shelter += 20
+        if v_money >= 30:
+            v_money -= 30
+            v_shelter += 20
+        else:
+            print('Кажется, у вас недостаточно монет... Что же, попробуете в следующий раз')
     else:
         print('')
+
+if v_health == 0:
+    print('Местные жители проиграли!')
 
 ans_4 = input('Нажмите "1" чтобы узнать свои текущие параметры: ')
 print('')
@@ -128,7 +141,7 @@ print('потерями. Может, отправите посла с отказ
 time.sleep(9)
 print('')
 print('Изменения ваших параметров: здоровье + 10')
-print('Изменение параметров Ангелов: здоровье - 40')
+print('Изменение параметров Ангелов: здоровье - 30')
 time.sleep(3)
 print('')
 print('Каким путём вы последуете в этот раз?')
@@ -136,15 +149,31 @@ time.sleep(1)
 ans_1 = int(input('Введите "1",если хотите помочь ангелам; '
                   'Введите "2",если хотите отказать в помощи: '))
 if ans_1 == 1:
-    v_health -= 20
-    health_n -= 20
+    if v_health >= 20:
+        if health_n >= 20:
+            v_health -= 20
+            health_n -= 20
+        else:
+            v_health -= 20
+            health_n = 0
+    else:
+        print('Похоже, у вас недостаточно ресурсов для этого выбора... В этот раз Ангелам придётся сражатся одним')
+
 elif ans_1 == 2:
     v_health += 10
-    health_n -= 40
+    if health_n >= 30:
+        health_n -= 30
+    else:
+        health_n = 0
 print('')
 print('Выбор сделан! ')
 print('')
 time.sleep(2)
+
+if health_n == 0:
+    print('Ангелы проиграли!')
+elif v_health == 0:
+    print('Местные жители проиграли!')
 
 
 input('Мирные жители, ваш час настал. Готовы продолжить игру?: ')
@@ -156,30 +185,49 @@ if rand_event1_d == 1:
     v_money += 20
 else:
     print('Какая неудача... Это стихия! Цунами! Око смерча! Ваше "убежище" уменьшилось на 30, "здоровье" на 20')
-    v_shelter -= 30
-    v_health -= 20
+    if v_shelter >= 30:
+        v_shelter -= 30
+        if v_health >= 20:
+            v_health -= 20
+        else:
+            v_health == 0
+    else:
+        v_shelter == 0
     print('Кажется, у вас появилась проблема...')
     time.sleep(1)
     print('')
     ans_6 = input('Введите "1", если хотите потратить 30 "монет" чтобы добавить +15 "убежища": ')
     print('')
     if ans_6 == 1:
-        v_money -= 30
-        v_shelter += 15
+        if v_money >= 30:
+            v_money -= 30
+            v_shelter += 15
+        else:
+            print('Кажется, у вас недостаточно монет... Что же, попробуете в следующий раз')
         ans_7 = input('Введите "1", если хотите потратить 20 "монет" чтобы добавить +10 "здоровья": ')
         print('')
         if ans_7 == 1:
-            v_money -= 20
-            v_health += 10
+            if v_money >= 20:
+                v_money -= 20
+                v_health += 10
+            else:
+                print('Кажется, у вас недостаточно монет... Что же, попробуете в следующий раз')
     else:
         ans_8 = input('Введите "1", если хотите потратить 20 "монеты" чтобы добавить +10 "здоровья": ')
         print('')
         if ans_8 == 1:
-            v_money -= 20
-            v_health += 10
+            if v_money >= 20:
+                v_money -= 20
+                v_health += 10
+            else:
+                print('Кажется, у вас недостаточно монет... Что же, попробуете в следующий раз')
         else:
             print('Продолжим!')
             print('')
+
+if v_health == 0:
+    print('Местные жители проиграли!')
+
 ans_5 = input('Нажмите "1" чтобы узнать свои текущие параметры: ')
 print('')
 if ans_5 == 1:
@@ -217,16 +265,50 @@ time.sleep(1)
 ans_14 = int(input('Введите "1",если хотите помочь ангелам; '
                    'Введите "2",если хотите отказать в помощи: '))
 if ans_14 == 1:
-    v_health -= 20
-    health_d -= 20
+    if v_health >= 20:
+        if health_n >= 20:
+            v_health -= 20
+            health_d -= 20
+        else:
+            v_health -= 20
+            health_n = 0
+    else:
+        print('Похоже, у вас недостаточно ресурсов для этого выбора... И всё же, вы должны помочь Ангелам, даже если лишь матриально!')
+        if v_money >= 20:
+            v_money -= 20
+            money_n += 20
+            health_n += 10
+        else:
+            money_n += v_money
+            v_money == 0
+            health_n += 10
+
 elif ans_14 == 2:
-    v_money -= 20
-    money_n += 20
-    health_n += 10
+    if v_money >= 20:
+        v_money -= 20
+        money_n += 20
+        health_n += 10
+    else:
+        money_n += v_money
+        v_money == 0
+        health_n += 10
 print('')
 print('Выбор сделан! ')
 print('')
 time.sleep(2)
+
+if v_health == 0:
+    print('Местные жители проиграли!')
+
+ans_17 = input('Нажмите "1" чтобы узнать свои текущие параметры: ')
+print('')
+if ans_17 == 1:
+    print('')
+    print('Итого:', '\n', 'Здоровье:', v_health, '\n', 'Монеты:', v_money, '\n', 'Убежище:', v_shelter)
+    print('')
+else:
+    print('Отличная работа!')
+print('')
 
 
 input('Мирные жители, вы готовы попытать удачу? ')
@@ -238,30 +320,33 @@ if rand_event1_d == 1:
     v_money += 20
     time.sleep(1)
     print('')
-    ans_11 = input('Введите "1", чтобы узнать свои текущие параметры: ')
-    print('')
-    if ans_11 == 1:
-        print('Итого:', '\n', 'Здоровье:', v_health, '\n', 'Монеты:', v_money, '\n', 'Убежище:', v_shelter)
-        print('')
-    else:
-        print('Продолжим!')
 else:
-    print('Могло быть и хуже, но некуда. В вашем поселении эпидемия дизентерии, "здоровье" уменьшилось на 40')
-    v_health -= 40
+    print('Могло быть и хуже, но некуда. В вашем поселении эпидемия дизентерии, "здоровье" уменьшилось на 30')
+    if v_health >= 30:
+        v_health -= 30
+    else:
+        v_health == 0
     time.sleep(1)
     print('Кажется, у вас появилась проблема...')
     print('')
     ans_12 = input('Введите "1", если хотите потратить 30 "монет" чтобы добавить +20 "здоровья"')
     if ans_12 == 1:
-        v_money -= 30
-        v_health += 20
-    else:
-        time.sleep(1)
-        print('Продолжим!')
-    print('')
-    ans_13 = input('Нажмите "1" чтобы узнать свои текущие параметры: ')
-    print('')
-    if ans_13 == 1:
-        print('Итого:', '\n', 'Здоровье:', v_health, '\n', 'Монеты:', v_money, '\n', 'Убежище:', v_shelter)
+        if v_money >= 30:
+            v_money -= 30
+            v_health += 20
+        else:
+            print('Кажется, у вас недостаточно монет... Что же, попробуете в следующий раз')
     else:
         print('Продолжим!')
+        print('')
+
+if v_health == 0:
+    print('Местные жители проиграли!')
+
+ans_13 = input('Нажмите "1" чтобы узнать свои текущие параметры: ')
+print('')
+if ans_13 == 1:
+    print('Итого:', '\n', 'Здоровье:', v_health, '\n', 'Монеты:', v_money, '\n', 'Убежище:', v_shelter)
+else:
+    print('Продолжим!')
+
